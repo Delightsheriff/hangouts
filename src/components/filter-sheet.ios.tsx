@@ -4,6 +4,8 @@ import {
   font,
   foregroundStyle,
   listRowBackground,
+  listSectionSpacing,
+  padding,
   pickerStyle,
   presentationDetents,
   presentationDragIndicator,
@@ -21,8 +23,9 @@ import { colors, nativeFonts } from '@/theme';
 import { whenOptions, type FilterSheetProps } from './filter-sheet.shared';
 
 // The app's palette and typeface, applied to the SwiftUI form.
+// The first detent is tall enough to show every section, Reset included, without clipping.
 const sheet = [
-  presentationDetents(['medium', 'large']),
+  presentationDetents([{ height: 560 }, 'large']),
   presentationDragIndicator('visible'),
   scrollContentBackground('hidden'),
   background(colors.background),
@@ -30,6 +33,8 @@ const sheet = [
   foregroundStyle(colors.text),
   font({ family: nativeFonts.medium, size: 16 }),
 ];
+// Clear the grabber at the top and keep rows off the sheet's rounded edges.
+const form = [padding({ top: 20, horizontal: 6 }), listSectionSpacing(20)];
 const row = [listRowBackground(colors.surface)];
 const header = [font({ family: nativeFonts.bold, size: 15 }), foregroundStyle(colors.text)];
 const footer = [font({ family: nativeFonts.regular, size: 13 }), foregroundStyle(colors.textSecondary)];
@@ -46,7 +51,7 @@ export function FilterSheet({ open, onOpenChange }: FilterSheetProps) {
     <Host style={styles.host}>
       <BottomSheet isPresented={open} onIsPresentedChange={onOpenChange}>
         <Group modifiers={sheet}>
-          <Form>
+          <Form modifiers={form}>
             <Section header={<Heading>When</Heading>}>
               <Picker<When>
                 selection={filters.when}
