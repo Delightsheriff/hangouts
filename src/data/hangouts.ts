@@ -44,7 +44,7 @@ const face = (path: string) => `https://randomuser.me/api/portraits/${path}.jpg`
 
 export const user = {
   name: 'Alex',
-  avatar: 'https://api.dicebear.com/9.x/avataaars/png?seed=Alex&backgroundColor=4f8ef7&size=256',
+  avatar: require('@/assets/images/avatar.png') as number,
 };
 
 export const categories: Category[] = [

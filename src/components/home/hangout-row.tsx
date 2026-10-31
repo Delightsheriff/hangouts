@@ -13,30 +13,30 @@ export function HangoutRow({ hangout }: { hangout: Hangout }) {
 
   return (
     <Link href={`/hangout/${hangout.id}`} asChild>
-      <Link.AppleZoom>
-        <PressableScale accessibilityRole="button" accessibilityLabel={hangout.title} style={styles.card}>
+      <PressableScale accessibilityRole="button" accessibilityLabel={hangout.title} style={styles.card}>
+        <Link.AppleZoom>
           <Image source={hangout.image} contentFit="cover" transition={250} style={styles.photo} />
-          <View style={styles.body}>
-            <Text style={styles.title} numberOfLines={1}>
-              {hangout.title}
+        </Link.AppleZoom>
+        <View style={styles.body}>
+          <Text style={styles.title} numberOfLines={1}>
+            {hangout.title}
+          </Text>
+          <Text style={styles.venue} numberOfLines={1}>
+            {hangout.venueArea}
+          </Text>
+          <View style={styles.footer}>
+            <Text style={styles.date} numberOfLines={1}>
+              {hangout.dateShort}
             </Text>
-            <Text style={styles.venue} numberOfLines={1}>
-              {hangout.venueArea}
+            <Text style={[styles.slots, left === 0 && styles.full]} numberOfLines={1}>
+              {left === 0 ? 'Waitlist' : `${left} slots left!`}
             </Text>
-            <View style={styles.footer}>
-              <Text style={styles.date} numberOfLines={1}>
-                {hangout.dateShort}
-              </Text>
-              <Text style={[styles.slots, left === 0 && styles.full]} numberOfLines={1}>
-                {left === 0 ? 'Waitlist' : `${left} slots left!`}
-              </Text>
-              <View style={styles.avatars}>
-                <AvatarStack avatars={hangout.avatars} size={26} extra={Math.min(extra, 9) || undefined} />
-              </View>
+            <View style={styles.avatars}>
+              <AvatarStack avatars={hangout.avatars} size={24} extra={Math.min(extra, 4) || undefined} />
             </View>
           </View>
-        </PressableScale>
-      </Link.AppleZoom>
+        </View>
+      </PressableScale>
     </Link>
   );
 }
@@ -53,13 +53,19 @@ const styles = StyleSheet.create({
     gap: 12,
     ...shadows.card,
   },
-  photo: { width: 100, height: 94, borderRadius: radii.image, borderCurve: 'continuous', backgroundColor: colors.border },
+  photo: {
+    width: 96,
+    height: 92,
+    borderRadius: radii.image,
+    borderCurve: 'continuous',
+    backgroundColor: colors.border,
+  },
   body: { flex: 1, gap: 3 },
   title: { fontFamily: fonts.bold, fontSize: 17, letterSpacing: -0.3, color: colors.text },
   venue: { fontFamily: fonts.regular, fontSize: 14.5, color: colors.textSecondary },
-  footer: { flexDirection: 'row', alignItems: 'center', marginTop: 8, gap: 8 },
-  date: { fontFamily: fonts.medium, fontSize: 13.5, color: colors.textSecondary },
-  slots: { flexShrink: 1, fontFamily: fonts.bold, fontSize: 11.5, color: colors.accentPurple },
+  footer: { flexDirection: 'row', alignItems: 'center', marginTop: 8, gap: 7 },
+  date: { flexShrink: 1, fontFamily: fonts.medium, fontSize: 13, color: colors.textSecondary },
+  slots: { fontFamily: fonts.bold, fontSize: 11, color: colors.accentPurple },
   full: { color: colors.heart },
   avatars: { marginLeft: 'auto' },
 });

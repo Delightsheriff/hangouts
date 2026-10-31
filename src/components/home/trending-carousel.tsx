@@ -78,46 +78,41 @@ function TrendingCard({ hangout, next, width, index, interval, scrollX }: CardPr
   return (
     <Animated.View style={[{ width, height: HEIGHT + 8, paddingTop: 8 }, cardStyle]}>
       {/* The next card peeking out from behind, like a stacked deck */}
-      <LinearGradient
-        colors={next.gradient}
-        start={{ x: 0, y: 0.5 }}
-        end={{ x: 1, y: 0.5 }}
-        style={styles.peek}
-      />
+      <LinearGradient colors={next.gradient} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={styles.peek} />
       <Link href={`/hangout/${hangout.id}`} asChild>
-        <Link.AppleZoom>
-          <PressableScale accessibilityRole="button" accessibilityLabel={hangout.title} style={[styles.card, shadows.glow]}>
-            <LinearGradient
-              colors={hangout.gradient}
-              locations={[0, 0.5, 1]}
-              start={{ x: 0, y: 0.35 }}
-              end={{ x: 1, y: 0.65 }}
-              style={StyleSheet.absoluteFill}
-            />
+        <PressableScale accessibilityRole="button" accessibilityLabel={hangout.title} style={styles.card}>
+          <LinearGradient
+            colors={hangout.gradient}
+            locations={[0, 0.5, 1]}
+            start={{ x: 0, y: 0.35 }}
+            end={{ x: 1, y: 0.65 }}
+            style={StyleSheet.absoluteFill}
+          />
+          <Link.AppleZoom>
             <View style={styles.photoFrame}>
               <Animated.View style={[StyleSheet.absoluteFill, photoStyle]}>
                 <Image source={hangout.image} contentFit="cover" transition={250} style={StyleSheet.absoluteFill} />
               </Animated.View>
             </View>
-            <View style={styles.body}>
-              <Text style={styles.title} numberOfLines={2}>
-                {hangout.title}
+          </Link.AppleZoom>
+          <View style={styles.body}>
+            <Text style={styles.title} numberOfLines={2}>
+              {hangout.title}
+            </Text>
+            <View style={styles.meta}>
+              <Icon sf="calendar" ion="calendar-outline" size={14} color={colors.textInverse} weight="semibold" />
+              <Text style={styles.metaText} numberOfLines={1}>
+                {hangout.dateShort}
               </Text>
-              <View style={styles.meta}>
-                <Icon sf="calendar" ion="calendar-outline" size={14} color={colors.textInverse} weight="semibold" />
-                <Text style={styles.metaText} numberOfLines={1}>
-                  {hangout.dateShort}
-                </Text>
-              </View>
-              <View style={styles.meta}>
-                <Icon sf="scope" ion="locate-outline" size={14} color={colors.textInverse} weight="semibold" />
-                <Text style={styles.metaText} numberOfLines={1}>
-                  {hangout.venue}
-                </Text>
-              </View>
             </View>
-          </PressableScale>
-        </Link.AppleZoom>
+            <View style={styles.meta}>
+              <Icon sf="scope" ion="locate-outline" size={14} color={colors.textInverse} weight="semibold" />
+              <Text style={styles.metaText} numberOfLines={1}>
+                {hangout.venue}
+              </Text>
+            </View>
+          </View>
+        </PressableScale>
       </Link>
     </Animated.View>
   );
@@ -126,7 +121,7 @@ function TrendingCard({ hangout, next, width, index, interval, scrollX }: CardPr
 const RADIUS = 46;
 
 const styles = StyleSheet.create({
-  list: { paddingHorizontal: GUTTER, paddingTop: 2, paddingBottom: 22 },
+  list: { paddingHorizontal: GUTTER, paddingTop: 2, paddingBottom: 10 },
   peek: {
     position: 'absolute',
     top: 0,
@@ -146,6 +141,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     gap: 12,
+    ...shadows.glow,
   },
   photoFrame: {
     width: 152,
@@ -156,7 +152,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.25)',
   },
   body: { flex: 1, gap: 7, paddingRight: 4 },
-  title: { fontFamily: fonts.bold, fontSize: 19, lineHeight: 23, letterSpacing: -0.3, color: colors.textInverse, marginBottom: 6 },
+  title: {
+    fontFamily: fonts.bold,
+    fontSize: 19,
+    lineHeight: 23,
+    letterSpacing: -0.3,
+    color: colors.textInverse,
+    marginBottom: 6,
+  },
   meta: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   metaText: { flex: 1, fontFamily: fonts.medium, fontSize: 12.5, color: colors.textInverse },
 });

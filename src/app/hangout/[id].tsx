@@ -89,9 +89,11 @@ function HangoutDetail({ hangout }: { hangout: Hangout }) {
         contentContainerStyle={{ paddingBottom: insets.bottom + 120 }}>
         <View style={{ height: HERO }}>
           <Link.AppleZoomTarget>
-            <Animated.View style={[StyleSheet.absoluteFill, heroStyle]}>
-              <Image source={hangout.image} contentFit="cover" transition={200} style={StyleSheet.absoluteFill} />
-            </Animated.View>
+            <View style={StyleSheet.absoluteFill}>
+              <Animated.View style={[StyleSheet.absoluteFill, heroStyle]}>
+                <Image source={hangout.image} contentFit="cover" transition={200} style={StyleSheet.absoluteFill} />
+              </Animated.View>
+            </View>
           </Link.AppleZoomTarget>
 
           <Animated.View style={[styles.titleBand, titleBandStyle]}>

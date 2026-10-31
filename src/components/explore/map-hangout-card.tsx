@@ -11,35 +11,38 @@ import type { Hangout } from '@/data/hangouts';
 import { colors, fonts, shadows } from '@/theme';
 
 export function MapHangoutCard({ hangout, width }: { hangout: Hangout; width: number }) {
-  // Time without the day prefix: "Tonight, 7:00 PM - 9:30 PM" stays as is on the card.
   return (
     <View style={[styles.card, { width }]}>
       <Link href={`/hangout/${hangout.id}`} asChild>
-        <Link.AppleZoom>
-          <PressableScale pressedScale={0.97} accessibilityRole="button" accessibilityLabel={hangout.title} style={styles.main}>
+        <PressableScale
+          pressedScale={0.97}
+          accessibilityRole="button"
+          accessibilityLabel={hangout.title}
+          style={styles.main}>
+          <Link.AppleZoom>
             <Image source={hangout.image} contentFit="cover" transition={250} style={styles.photo} />
-            <View style={styles.body}>
-              <Text style={styles.title} numberOfLines={2}>
-                {hangout.title}
-              </Text>
-              <View style={styles.when}>
-                <Icon sf="calendar" ion="calendar-outline" size={24} type="palette" colors={['#3D7BD9', '#CFE2F8']} />
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.time} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.85}>
-                    {hangout.dateRange}
-                  </Text>
-                  <Text style={styles.doors} numberOfLines={1}>
-                    {hangout.doorsShort}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.footer}>
-                <AvatarStack avatars={hangout.avatars} size={22} />
-                <Text style={styles.attendees}>{hangout.attendees} attendees</Text>
+          </Link.AppleZoom>
+          <View style={styles.body}>
+            <Text style={styles.title} numberOfLines={2}>
+              {hangout.title}
+            </Text>
+            <View style={styles.when}>
+              <Icon sf="calendar" ion="calendar-outline" size={24} type="palette" colors={['#3D7BD9', '#CFE2F8']} />
+              <View style={{ flex: 1 }}>
+                <Text style={styles.time} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.85}>
+                  {hangout.dateRange}
+                </Text>
+                <Text style={styles.doors} numberOfLines={1}>
+                  {hangout.doorsShort}
+                </Text>
               </View>
             </View>
-          </PressableScale>
-        </Link.AppleZoom>
+            <View style={styles.footer}>
+              <AvatarStack avatars={hangout.avatars} size={22} />
+              <Text style={styles.attendees}>{hangout.attendees} attendees</Text>
+            </View>
+          </View>
+        </PressableScale>
       </Link>
       {/* Siblings of the link so their taps don't open the detail screen */}
       <View style={styles.actions}>
