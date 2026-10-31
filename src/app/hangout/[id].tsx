@@ -11,7 +11,6 @@ import Animated, {
   FadeIn,
   FadeInDown,
   interpolate,
-  LinearTransition,
   useAnimatedReaction,
   useAnimatedScrollHandler,
   useAnimatedStyle,
@@ -53,17 +52,14 @@ function HangoutDetail({ hangout }: { hangout: Hangout }) {
     () => scrollY.value > collapseAt,
     (solid, prev) => {
       if (solid !== prev) scheduleOnRN(setHeaderSolid, solid);
-    }
+    },
   );
 
   // Stretch when pulled down, drift at half speed when scrolled up.
   const heroStyle = useAnimatedStyle(() => {
     const y = scrollY.value;
     return {
-      transform: [
-        { translateY: y < 0 ? y / 2 : y * 0.45 },
-        { scale: y < 0 ? 1 + -y / HERO : 1 },
-      ],
+      transform: [{ translateY: y < 0 ? y / 2 : y * 0.45 }, { scale: y < 0 ? 1 + -y / HERO : 1 }],
     };
   });
   const titleBandStyle = useAnimatedStyle(() => ({
@@ -99,7 +95,10 @@ function HangoutDetail({ hangout }: { hangout: Hangout }) {
           <Animated.View style={[styles.titleBand, titleBandStyle]}>
             <BlurView intensity={26} tint="dark" style={StyleSheet.absoluteFill} />
             <LinearGradient colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.18)']} style={StyleSheet.absoluteFill} />
-            <Animated.Text entering={FadeInDown.delay(150).springify().damping(18)} style={styles.heroTitle} numberOfLines={2}>
+            <Animated.Text
+              entering={FadeInDown.delay(150).springify().damping(18)}
+              style={styles.heroTitle}
+              numberOfLines={2}>
               {hangout.title}
             </Animated.Text>
             <Animated.View entering={FadeInDown.delay(220).springify().damping(18)} style={styles.tags}>
@@ -118,13 +117,23 @@ function HangoutDetail({ hangout }: { hangout: Hangout }) {
         <View style={styles.sheet}>
           <Animated.View entering={FadeInDown.delay(120).springify().damping(20)} style={styles.infoCard}>
             <InfoRow
-              icon={<Icon sf="calendar" ion="calendar-outline" size={30} type="palette" colors={['#3D7BD9', '#CFE2F8']} />}
+              icon={
+                <Icon sf="calendar" ion="calendar-outline" size={30} type="palette" colors={['#3D7BD9', '#CFE2F8']} />
+              }
               title={hangout.dateRange}
               subtitle={hangout.doorsLong}
             />
             <View style={styles.divider} />
             <InfoRow
-              icon={<Icon sf="mappin.and.ellipse" ion="location-outline" size={28} type="palette" colors={[colors.pin, '#F7B4CD']} />}
+              icon={
+                <Icon
+                  sf="mappin.and.ellipse"
+                  ion="location-outline"
+                  size={28}
+                  type="palette"
+                  colors={[colors.pin, '#F7B4CD']}
+                />
+              }
               title={hangout.venue}
               subtitle={hangout.venueNote}
               onPress={() => Linking.openURL(`https://maps.apple.com/?q=${encodeURIComponent(hangout.venue)}`)}
@@ -160,15 +169,17 @@ function HangoutDetail({ hangout }: { hangout: Hangout }) {
       </Animated.View>
 
       <View style={[styles.controls, { top: insets.top + 6 }]}>
-        <GlassButton accessibilityLabel="Back" onPress={() => (router.canGoBack() ? router.back() : router.replace('/'))}>
-          <Icon sf="chevron.left" ion="chevron-back" size={18} weight="semibold" color={headerSolid ? colors.text : '#fff'} />
+        <GlassButton
+          accessibilityLabel="Back"
+          onPress={() => (router.canGoBack() ? router.back() : router.replace('/'))}>
+          <Icon sf="chevron.left" ion="chevron-back" size={18} weight="semibold" color={colors.text} />
         </GlassButton>
         <View style={styles.controlsRight}>
           <GlassButton accessibilityLabel="Share">
-            <ShareButton hangout={hangout} size={19} color={headerSolid ? colors.text : '#fff'} />
+            <ShareButton hangout={hangout} size={19} color={colors.text} />
           </GlassButton>
           <GlassButton accessibilityLabel="Save">
-            <HeartButton id={hangout.id} size={19} color={headerSolid ? colors.text : '#fff'} />
+            <HeartButton id={hangout.id} size={19} color={colors.text} />
           </GlassButton>
         </View>
       </View>
@@ -178,9 +189,22 @@ function HangoutDetail({ hangout }: { hangout: Hangout }) {
   );
 }
 
-function InfoRow({ icon, title, subtitle, onPress }: { icon: React.ReactNode; title: string; subtitle: string; onPress?: () => void }) {
+function InfoRow({
+  icon,
+  title,
+  subtitle,
+  onPress,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  subtitle: string;
+  onPress?: () => void;
+}) {
   return (
-    <Pressable onPress={onPress} disabled={!onPress} style={({ pressed }) => [styles.infoRow, pressed && { opacity: 0.6 }]}>
+    <Pressable
+      onPress={onPress}
+      disabled={!onPress}
+      style={({ pressed }) => [styles.infoRow, pressed && { opacity: 0.6 }]}>
       <View style={styles.infoIcon}>{icon}</View>
       <View style={{ flex: 1, gap: 4 }}>
         <Text style={styles.infoTitle}>{title}</Text>
@@ -198,26 +222,35 @@ function BookingBar({ hangout, bottomInset }: { hangout: Hangout; bottomInset: n
 
   return (
     <View pointerEvents="box-none" style={[styles.bookingWrap, { paddingBottom: Math.max(bottomInset, 12) }]}>
-      <LinearGradient colors={['rgba(255,255,255,0)', '#fff']} locations={[0, 0.55]} style={StyleSheet.absoluteFill} pointerEvents="none" />
+      <LinearGradient
+        colors={['rgba(255,255,255,0)', '#fff']}
+        locations={[0, 0.55]}
+        style={StyleSheet.absoluteFill}
+        pointerEvents="none"
+      />
       <View style={styles.booking}>
         <PressableScale
           pressedScale={0.96}
           accessibilityRole="button"
           accessibilityState={{ selected: joined }}
           onPress={() => {
-            Haptics.notificationAsync(joined ? Haptics.NotificationFeedbackType.Warning : Haptics.NotificationFeedbackType.Success);
+            Haptics.notificationAsync(
+              joined ? Haptics.NotificationFeedbackType.Warning : Haptics.NotificationFeedbackType.Success,
+            );
             hangoutActions.toggleWaitlist(hangout.id);
           }}
-          style={[styles.cta, joined && styles.ctaJoined]}>
-          <Animated.View key={label} entering={FadeIn.duration(220)} layout={LinearTransition} style={styles.ctaInner}>
-            <Icon
-              sf={joined ? 'checkmark.circle.fill' : 'star.fill'}
-              ion={joined ? 'checkmark-circle' : 'star'}
-              size={15}
-              color={joined ? colors.text : '#fff'}
-              animationSpec={joined ? { effect: { type: 'bounce' } } : undefined}
-            />
-            <Text style={[styles.ctaText, joined && { color: colors.text }]}>{label}</Text>
+          style={styles.ctaPress}>
+          <Animated.View style={[styles.cta, joined && styles.ctaJoined]}>
+            <Animated.View key={label} entering={FadeIn.duration(220)} style={styles.ctaInner}>
+              <Icon
+                sf={joined ? 'checkmark.circle.fill' : 'star.fill'}
+                ion={joined ? 'checkmark-circle' : 'star'}
+                size={15}
+                color={joined ? colors.text : '#fff'}
+                animationSpec={joined ? { effect: { type: 'bounce' } } : undefined}
+              />
+              <Text style={[styles.ctaText, joined && { color: colors.text }]}>{label}</Text>
+            </Animated.View>
           </Animated.View>
         </PressableScale>
         <View style={styles.price}>
@@ -269,7 +302,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 16,
   },
-  infoCard: { backgroundColor: colors.surfaceMuted, borderRadius: 26, borderCurve: 'continuous', paddingHorizontal: 14 },
+  infoCard: {
+    backgroundColor: colors.surfaceMuted,
+    borderRadius: 26,
+    borderCurve: 'continuous',
+    paddingHorizontal: 14,
+  },
   infoRow: { flexDirection: 'row', alignItems: 'center', gap: 14, paddingVertical: 18 },
   infoIcon: { width: 36, alignItems: 'center' },
   infoTitle: { fontFamily: fonts.bold, fontSize: 16.5, letterSpacing: -0.2, color: colors.text },
@@ -279,7 +317,15 @@ const styles = StyleSheet.create({
   paragraph: { marginBottom: 16 },
   attendees: { flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 6 },
   attendeesText: { fontFamily: fonts.medium, fontSize: 14, color: colors.textSecondary },
-  header: { position: 'absolute', top: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
+  header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
   headerTitle: { fontFamily: fonts.bold, fontSize: 16, color: colors.text, maxWidth: '60%' },
   controls: { position: 'absolute', left: 16, right: 16, flexDirection: 'row', justifyContent: 'space-between' },
   controlsRight: { flexDirection: 'row', gap: 10 },
@@ -295,7 +341,16 @@ const styles = StyleSheet.create({
     gap: 16,
     ...shadows.floating,
   },
-  cta: { flex: 1, height: 56, borderRadius: 28, backgroundColor: colors.ink, alignItems: 'center', justifyContent: 'center' },
+  ctaPress: { flex: 1 },
+  cta: {
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: colors.ink,
+    alignItems: 'center',
+    justifyContent: 'center',
+    transitionProperty: 'backgroundColor',
+    transitionDuration: 260,
+  },
   ctaJoined: { backgroundColor: colors.upcomingBg },
   ctaInner: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   ctaText: { fontFamily: fonts.medium, fontSize: 17.5, color: '#fff' },

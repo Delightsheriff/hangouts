@@ -17,12 +17,21 @@ type Props = {
 };
 
 /** SF Symbols on iOS with an Ionicons fallback for Android and web. */
-export function Icon({ sf, ion, size = 20, color = '#141414', weight = 'regular', type, colors, animationSpec }: Props) {
+export function Icon({
+  sf,
+  ion,
+  size = 20,
+  color = '#141414',
+  weight = 'regular',
+  type,
+  colors,
+  animationSpec,
+}: Props) {
   return (
     <SymbolView
       name={sf}
       size={size}
-      tintColor={color as string}
+      tintColor={colors ? undefined : (color as string)}
       weight={weight}
       type={type}
       colors={colors}
