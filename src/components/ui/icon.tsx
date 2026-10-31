@@ -29,7 +29,7 @@ export function Icon({ sf, ion, size = 20, color = '#141414', weight = 'regular'
       animationSpec={animationSpec}
       resizeMode="scaleAspectFit"
       style={{ width: size, height: size }}
-      fallback={<Ionicons name={ion} size={size} color={color} />}
+      fallback={<Ionicons name={ion} size={size} color={color as string} />}
     />
   );
 }
