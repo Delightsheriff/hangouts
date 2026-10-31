@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 22,
   },
-  title: { fontFamily: fonts.bold, fontSize: 21, letterSpacing: -0.3, color: colors.textInverse },
+  title: { fontFamily: fonts.semibold, fontSize: 20, letterSpacing: -0.3, color: colors.textInverse },
   tags: { flexDirection: 'row', gap: 8, marginTop: 12 },
   tag: { height: 34, paddingHorizontal: 18, borderRadius: 17, justifyContent: 'center' },
   tagText: { fontFamily: fonts.semibold, fontSize: 15 },

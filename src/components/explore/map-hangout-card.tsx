@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   main: { flexDirection: 'row', alignItems: 'center', padding: 14, gap: 12 },
   photo: { width: 122, height: 108, borderRadius: 26, borderCurve: 'continuous', backgroundColor: colors.border },
   body: { flex: 1, height: 108, justifyContent: 'space-between' },
-  title: { fontFamily: fonts.bold, fontSize: 17.5, lineHeight: 21, letterSpacing: -0.3, color: colors.text },
+  title: { fontFamily: fonts.semibold, fontSize: 17.5, lineHeight: 21, letterSpacing: -0.3, color: colors.text },
   when: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   time: { fontFamily: fonts.bold, fontSize: 12.5, color: colors.text },
   doors: { fontFamily: fonts.regular, fontSize: 12.5, color: colors.textSecondary, marginTop: 1 },

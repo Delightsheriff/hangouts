@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
   body: { flex: 1, gap: 7, paddingRight: 4 },
   title: {
-    fontFamily: fonts.bold,
+    fontFamily: fonts.semibold,
     fontSize: 19,
     lineHeight: 23,
     letterSpacing: -0.3,

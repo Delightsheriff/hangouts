@@ -28,7 +28,7 @@ export function AboutSection({ hangout }: { hangout: Hangout }) {
 }
 
 const styles = StyleSheet.create({
-  heading: { ...type.section, fontSize: 19, marginTop: 26, marginBottom: 10 },
+  heading: { ...type.section, fontSize: 18, marginTop: 26, marginBottom: 10 },
   paragraph: { marginBottom: 16 },
   attendees: { flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 6 },
   attendeesText: { fontFamily: fonts.medium, fontSize: 14, color: colors.textSecondary },

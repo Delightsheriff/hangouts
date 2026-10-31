@@ -20,7 +20,7 @@ export function SearchBar({ value, onChangeText, onPressFilter, activeFilters = 
   return (
     <View style={[styles.row, style]}>
       <View style={[styles.field, focused && styles.fieldFocused]}>
-        <Icon sf="magnifyingglass" ion="search-outline" size={20} color={colors.text} weight="medium" />
+        <Icon sf="magnifyingglass" ion="search-outline" size={20} color={colors.text} weight="light" />
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -40,7 +40,7 @@ export function SearchBar({ value, onChangeText, onPressFilter, activeFilters = 
         accessibilityRole="button"
         accessibilityLabel="Filters"
         style={styles.filter}>
-        <Icon sf="slider.horizontal.3" ion="options-outline" size={22} color={colors.text} weight="medium" />
+        <Icon sf="slider.horizontal.3" ion="options-outline" size={22} color={colors.text} weight="light" />
         {activeFilters > 0 && <View style={styles.dot} />}
       </PressableScale>
     </View>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   fieldFocused: { borderColor: '#C9C9C9', backgroundColor: colors.surface },
-  input: { flex: 1, height: '100%', fontFamily: fonts.medium, fontSize: 16, color: colors.text },
+  input: { flex: 1, height: '100%', fontFamily: fonts.regular, fontSize: 16, color: colors.text },
   filter: {
     width: SIZE,
     height: SIZE,

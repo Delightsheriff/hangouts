@@ -61,9 +61,9 @@ export const radii = {
 } as const;
 
 export const type = {
-  greeting: { fontFamily: fonts.extrabold, fontSize: 20, letterSpacing: -0.3, color: colors.text },
-  subtitle: { fontFamily: fonts.medium, fontSize: 16, color: colors.text },
-  section: { fontFamily: fonts.bold, fontSize: 18, letterSpacing: -0.2, color: colors.text },
+  greeting: { fontFamily: fonts.bold, fontSize: 19, letterSpacing: -0.3, color: colors.text },
+  subtitle: { fontFamily: fonts.regular, fontSize: 16, color: colors.text },
+  section: { fontFamily: fonts.semibold, fontSize: 18, letterSpacing: -0.2, color: colors.text },
   link: { fontFamily: fonts.medium, fontSize: 14, color: colors.textSecondary },
   cardTitle: { fontFamily: fonts.bold, fontSize: 17, letterSpacing: -0.2, color: colors.text },
   body: { fontFamily: fonts.regular, fontSize: 16, lineHeight: 26, color: colors.textSecondary },

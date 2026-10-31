@@ -50,5 +50,5 @@ const styles = StyleSheet.create({
   },
   active: { backgroundColor: colors.surface, borderColor: 'transparent', ...shadows.chip },
   label: { fontFamily: fonts.medium, fontSize: 15, color: colors.textMuted },
-  labelActive: { fontFamily: fonts.bold, color: colors.text },
+  labelActive: { fontFamily: fonts.semibold, color: colors.text },
 });

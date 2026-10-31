@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   pressed: { opacity: 0.6 },
   icon: { width: 36, alignItems: 'center' },
   text: { flex: 1, gap: 4 },
-  title: { fontFamily: fonts.bold, fontSize: 16.5, letterSpacing: -0.2, color: colors.text },
+  title: { fontFamily: fonts.semibold, fontSize: 16.5, letterSpacing: -0.2, color: colors.text },
   subtitle: { fontFamily: fonts.regular, fontSize: 13.5, lineHeight: 19, color: colors.textSecondary },
   divider: { height: 1, backgroundColor: colors.hairline, marginLeft: 6 },
 });
