@@ -12,11 +12,15 @@ The design is by **Jennie** ([@jenidesignns](https://x.com/jenidesignns)). I fou
 
 [![Walkthrough of the app in an iPhone frame](docs/media/poster.jpg)](docs/media/demo.mp4)
 
-The walkthrough was recorded on the iOS Simulator. Click the image to play it.
+The walkthrough was recorded on the iOS Simulator and covers Home, a hangout, Explore and filters, Chats, and Profile. Click the image to play it.
 
-| Home | Hangout | Explore | Filters |
-| --- | --- | --- | --- |
-| ![Home](docs/media/framed/home.png) | ![Hangout detail](docs/media/framed/detail.png) | ![Explore map](docs/media/framed/explore.png) | ![Filter sheet](docs/media/framed/filters.png) |
+| Home | Hangout | Explore |
+| --- | --- | --- |
+| ![Home](docs/media/framed/home.png) | ![Hangout detail](docs/media/framed/detail.png) | ![Explore map](docs/media/framed/explore.png) |
+
+| Filters | Chats | Profile |
+| --- | --- | --- |
+| ![Filter sheet](docs/media/framed/filters.png) | ![Chats](docs/media/framed/chats.png) | ![Profile with saved and joined hangouts](docs/media/framed/profile.png) |
 
 ## Features
 
@@ -24,7 +28,8 @@ The walkthrough was recorded on the iOS Simulator. Click the image to play it.
 - **Hangout detail**: a full-bleed hero with a glass back button and a white sheet that overlaps it. Under that are the date and venue, the description, and a floating bar to book or join the waitlist. Opening a hangout uses the Apple zoom transition.
 - **Explore**: Apple Maps on iOS and Google Maps on Android, with points of interest hidden, category pins, date pills and a swipeable card carousel kept in sync with the map.
 - **Filters**: a SwiftUI sheet built with Expo UI, styled with the app's colours and typeface.
-- **Chats and Profile**: tabs styled to match the rest of the app.
+- **Chats**: one thread per hangout, with unread dots, opening straight into that hangout.
+- **Profile**: saved, waitlist and attended counts, plus the hangouts you've saved or joined.
 - Native tabs with Liquid Glass on iOS 26, haptics on key actions, and motion kept short and subtle that respects Reduce Motion.
 
 ## Tech
