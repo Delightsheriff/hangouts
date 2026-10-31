@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Icon } from '@/components/ui/icon';
 import { PressableScale } from '@/components/ui/pressable-scale';
 import { spotsLeft, type Hangout } from '@/data/hangouts';
+import { useSpotsLeft } from '@/hooks/use-spots-left';
 import { hangoutActions, useHangoutStore } from '@/store/hangouts-store';
 import { colors, fonts, motion, shadows } from '@/theme';
 
@@ -15,9 +16,10 @@ const labelIn = FadeIn.duration(motion.fast).reduceMotion(ReduceMotion.System);
 /** Floating join bar: waitlist when full, booking otherwise. */
 export function BookingBar({ hangout }: { hangout: Hangout }) {
   const insets = useSafeAreaInsets();
-  const joined = useHangoutStore((s) => s.waitlisted.has(hangout.id));
-  const left = spotsLeft(hangout);
-  const full = left === 0;
+  // Decide from the hangout's own capacity, so booking the last spot doesn't flip the bar to a waitlist.
+  const full = spotsLeft(hangout) === 0;
+  const joined = useHangoutStore((s) => (full ? s.waitlisted : s.booked).has(hangout.id));
+  const left = useSpotsLeft(hangout);
   const label = full ? (joined ? 'On the waitlist' : 'Join waitlist') : joined ? 'You’re going' : 'Book a spot';
 
   return (
@@ -36,7 +38,7 @@ export function BookingBar({ hangout }: { hangout: Hangout }) {
             Haptics.notificationAsync(
               joined ? Haptics.NotificationFeedbackType.Warning : Haptics.NotificationFeedbackType.Success,
             );
-            hangoutActions.toggleWaitlist(hangout.id);
+            (full ? hangoutActions.toggleWaitlist : hangoutActions.toggleBooking)(hangout.id);
           }}
           style={styles.press}>
           <View style={[styles.cta, joined && styles.ctaJoined]}>

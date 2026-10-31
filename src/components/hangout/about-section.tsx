@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import { AvatarStack } from '@/components/ui/avatar-stack';
-import { spotsLeft, type Hangout } from '@/data/hangouts';
+import { type Hangout } from '@/data/hangouts';
+import { useSpotsLeft } from '@/hooks/use-spots-left';
 import { colors, fonts, type } from '@/theme';
 
 export function AboutSection({ hangout }: { hangout: Hangout }) {
-  const filled = Math.min(hangout.capacity, hangout.attendees);
+  const left = useSpotsLeft(hangout);
+  const filled = hangout.capacity - left;
 
   return (
     <View>
@@ -20,7 +22,7 @@ export function AboutSection({ hangout }: { hangout: Hangout }) {
       <View style={styles.attendees}>
         <AvatarStack avatars={hangout.avatars} size={30} extra={Math.max(0, filled - hangout.avatars.length)} />
         <Text style={styles.attendeesText}>
-          {filled} spots filled · {spotsLeft(hangout)} spots left
+          {filled} spots filled · {left} spots left
         </Text>
       </View>
     </View>

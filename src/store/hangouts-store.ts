@@ -11,13 +11,15 @@ export type Filters = {
 
 type State = {
   saved: ReadonlySet<string>;
+  // Spots the user booked on hangouts with room, kept apart from waitlists on full ones.
+  booked: ReadonlySet<string>;
   waitlisted: ReadonlySet<string>;
   filters: Filters;
 };
 
 export const defaultFilters: Filters = { when: 'upcoming', maxDistanceKm: 25, freeOnly: false, hideFull: false };
 
-let state: State = { saved: new Set(), waitlisted: new Set(), filters: defaultFilters };
+let state: State = { saved: new Set(), booked: new Set(), waitlisted: new Set(), filters: defaultFilters };
 const listeners = new Set<() => void>();
 
 function setState(next: Partial<State>) {
@@ -38,6 +40,7 @@ function toggle(set: ReadonlySet<string>, id: string) {
 
 export const hangoutActions = {
   toggleSaved: (id: string) => setState({ saved: toggle(state.saved, id) }),
+  toggleBooking: (id: string) => setState({ booked: toggle(state.booked, id) }),
   toggleWaitlist: (id: string) => setState({ waitlisted: toggle(state.waitlisted, id) }),
   setFilters: (patch: Partial<Filters>) => setState({ filters: { ...state.filters, ...patch } }),
   resetFilters: () => setState({ filters: defaultFilters }),

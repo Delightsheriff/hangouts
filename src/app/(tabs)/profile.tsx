@@ -8,8 +8,9 @@ import { colors, fonts, radii, shadows, spacing, type } from '@/theme';
 
 export default function ProfileScreen() {
   const saved = useHangoutStore((s) => s.saved);
+  const booked = useHangoutStore((s) => s.booked);
   const waitlisted = useHangoutStore((s) => s.waitlisted);
-  const savedList = hangouts.filter((h) => saved.has(h.id) || waitlisted.has(h.id));
+  const savedList = hangouts.filter((h) => saved.has(h.id) || booked.has(h.id) || waitlisted.has(h.id));
 
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic" contentContainerStyle={styles.content}>
@@ -19,6 +20,8 @@ export default function ProfileScreen() {
         <Text style={type.meta}>San Francisco, CA</Text>
         <View style={styles.stats}>
           <Stat value={saved.size} label="Saved" />
+          <View style={styles.divider} />
+          <Stat value={booked.size} label="Going" />
           <View style={styles.divider} />
           <Stat value={waitlisted.size} label="Waitlists" />
           <View style={styles.divider} />
@@ -30,7 +33,9 @@ export default function ProfileScreen() {
       {savedList.length ? (
         savedList.map((h) => <HangoutRow key={h.id} hangout={h} />)
       ) : (
-        <Text style={styles.hint}>Tap the heart on a hangout or join a waitlist and it will show up here.</Text>
+        <Text style={styles.hint}>
+          Tap the heart on a hangout, book a spot or join a waitlist and it will show up here.
+        </Text>
       )}
     </ScrollView>
   );

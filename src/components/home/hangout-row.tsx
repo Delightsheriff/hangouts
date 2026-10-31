@@ -4,11 +4,12 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { AvatarStack } from '@/components/ui/avatar-stack';
 import { PressableScale } from '@/components/ui/pressable-scale';
-import { spotsLeft, type Hangout } from '@/data/hangouts';
+import { type Hangout } from '@/data/hangouts';
+import { useSpotsLeft } from '@/hooks/use-spots-left';
 import { colors, fonts, radii, shadows } from '@/theme';
 
 export function HangoutRow({ hangout }: { hangout: Hangout }) {
-  const left = spotsLeft(hangout);
+  const left = useSpotsLeft(hangout);
   const extra = Math.max(0, hangout.attendees - hangout.avatars.length);
 
   return (
