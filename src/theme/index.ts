@@ -40,6 +40,14 @@ export const fonts = {
   extrabold: 'PlusJakartaSans_800ExtraBold',
 } as const;
 
+/** PostScript names of the same faces, for SwiftUI views rendered through Expo UI. */
+export const nativeFonts = {
+  regular: 'PlusJakartaSans-Regular',
+  medium: 'PlusJakartaSans-Medium',
+  semibold: 'PlusJakartaSans-SemiBold',
+  bold: 'PlusJakartaSans-Bold',
+} as const;
+
 export const spacing = {
   screen: 20,
   section: 28,
@@ -76,3 +84,5 @@ export const shadows = {
   floating: shadow(16, 40, 0.14),
   glow: shadow(14, 34, 0.3, '#F7793B'),
 };
+
+export { motion, enterAt, listLayout } from './motion';

@@ -21,7 +21,6 @@ export function GlassButton({ onPress, accessibilityLabel, children, size = 44 }
   return (
     <PressableScale
       haptic={!!onPress}
-      pressedScale={0.9}
       onPress={onPress}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
@@ -29,7 +28,12 @@ export function GlassButton({ onPress, accessibilityLabel, children, size = 44 }
       {glass ? (
         <GlassView pointerEvents="none" glassEffectStyle="regular" style={[StyleSheet.absoluteFill, shape]} />
       ) : (
-        <BlurView pointerEvents="none" intensity={50} tint="light" style={[StyleSheet.absoluteFill, shape, styles.clip]} />
+        <BlurView
+          pointerEvents="none"
+          intensity={50}
+          tint="light"
+          style={[StyleSheet.absoluteFill, shape, styles.clip]}
+        />
       )}
       {/* When the button owns the press, its content must not catch touches; otherwise let a nested control handle them. */}
       <View pointerEvents={onPress ? 'none' : 'box-none'} style={[StyleSheet.absoluteFill, styles.center]}>

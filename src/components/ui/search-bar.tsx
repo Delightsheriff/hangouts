@@ -36,7 +36,6 @@ export function SearchBar({ value, onChangeText, onPressFilter, activeFilters = 
       </View>
       <PressableScale
         haptic
-        pressedScale={0.92}
         onPress={onPressFilter}
         accessibilityRole="button"
         accessibilityLabel="Filters"

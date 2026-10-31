@@ -14,11 +14,7 @@ export function MapHangoutCard({ hangout, width }: { hangout: Hangout; width: nu
   return (
     <View style={[styles.card, { width }]}>
       <Link href={`/hangout/${hangout.id}`} asChild>
-        <PressableScale
-          pressedScale={0.97}
-          accessibilityRole="button"
-          accessibilityLabel={hangout.title}
-          style={styles.main}>
+        <PressableScale accessibilityRole="button" accessibilityLabel={hangout.title} style={styles.main}>
           <Link.AppleZoom>
             <Image source={hangout.image} contentFit="cover" transition={250} style={styles.photo} />
           </Link.AppleZoom>

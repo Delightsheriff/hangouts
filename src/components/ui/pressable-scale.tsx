@@ -1,34 +1,45 @@
 import * as Haptics from 'expo-haptics';
 import type { ReactNode } from 'react';
 import { Pressable, type PressableProps, type StyleProp, type ViewStyle } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { motion } from '@/theme/motion';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+const timing = { duration: motion.fast, easing: motion.easeOut };
 
 type Props = Omit<PressableProps, 'style' | 'children'> & {
   children: ReactNode;
   style?: StyleProp<ViewStyle>;
-  /** Scale reached while pressed */
-  pressedScale?: number;
   haptic?: boolean;
 };
 
-const spring = { damping: 18, stiffness: 320, mass: 0.6 };
-
-/** Pressable that springs down on touch, the way native cards respond. */
-export function PressableScale({ children, style, pressedScale = 0.97, haptic = false, onPressIn, onPressOut, onPress, ...rest }: Props) {
+/** Pressable that settles to 0.96 while held. Disabled or Reduce Motion: no scale. */
+export function PressableScale({
+  children,
+  style,
+  haptic = false,
+  disabled,
+  onPressIn,
+  onPressOut,
+  onPress,
+  ...rest
+}: Props) {
+  const reduceMotion = useReducedMotion();
   const scale = useSharedValue(1);
   const animatedStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
+  const animate = !disabled && !reduceMotion;
 
   return (
     <AnimatedPressable
       {...rest}
+      disabled={disabled}
       onPressIn={(e) => {
-        scale.value = withSpring(pressedScale, spring);
+        if (animate) scale.value = withTiming(motion.pressScale, timing);
         onPressIn?.(e);
       }}
       onPressOut={(e) => {
-        scale.value = withSpring(1, spring);
+        if (animate) scale.value = withTiming(1, timing);
         onPressOut?.(e);
       }}
       onPress={(e) => {
