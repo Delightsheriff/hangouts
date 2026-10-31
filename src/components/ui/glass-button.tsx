@@ -27,11 +27,12 @@ export function GlassButton({ onPress, accessibilityLabel, children, size = 44 }
       accessibilityLabel={accessibilityLabel}
       style={shape}>
       {glass ? (
-        <GlassView glassEffectStyle="regular" isInteractive style={[StyleSheet.absoluteFill, shape]} />
+        <GlassView pointerEvents="none" glassEffectStyle="regular" style={[StyleSheet.absoluteFill, shape]} />
       ) : (
-        <BlurView intensity={50} tint="light" style={[StyleSheet.absoluteFill, shape, styles.clip]} />
+        <BlurView pointerEvents="none" intensity={50} tint="light" style={[StyleSheet.absoluteFill, shape, styles.clip]} />
       )}
-      <View pointerEvents="box-none" style={[StyleSheet.absoluteFill, styles.center]}>
+      {/* When the button owns the press, its content must not catch touches; otherwise let a nested control handle them. */}
+      <View pointerEvents={onPress ? 'none' : 'box-none'} style={[StyleSheet.absoluteFill, styles.center]}>
         {children}
       </View>
     </PressableScale>
