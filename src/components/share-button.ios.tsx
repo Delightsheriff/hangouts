@@ -15,7 +15,7 @@ export function ShareButton({ hangout, size = 20, color = colors.textSecondary }
         message={`${hangout.title} · ${hangout.dateShort}`}
         preview={{ title: hangout.title, image: hangout.image }}
         modifiers={[buttonStyle('plain')]}>
-        <Image systemName="square.and.arrow.up" size={size - 2} color={color} />
+        <Image systemName="point.3.connected.trianglepath.dotted" size={size - 2} color={color} />
       </ShareLink>
     </Host>
   );

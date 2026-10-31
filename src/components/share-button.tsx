@@ -12,7 +12,7 @@ export function ShareButton({ hangout, size = 20, color = colors.textSecondary }
       accessibilityRole="button"
       accessibilityLabel={`Share ${hangout.title}`}
       onPress={() => Share.share({ title: hangout.title, message: `${hangout.title} · ${shareUrl(hangout)}` })}>
-      <Icon sf="square.and.arrow.up" ion="share-social-outline" size={size} color={color} />
+      <Icon sf="point.3.connected.trianglepath.dotted" ion="share-social-outline" size={size} color={color} />
     </Pressable>
   );
 }
