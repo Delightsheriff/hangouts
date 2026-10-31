@@ -36,6 +36,11 @@ export function AvatarStack({ avatars, size = 26, extra }: Props) {
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center' },
   avatar: { borderWidth: 2, borderColor: colors.surface, backgroundColor: colors.border },
-  extra: { backgroundColor: colors.surface, alignItems: 'center', justifyContent: 'center', boxShadow: '0px 1px 4px rgba(0,0,0,0.12)' },
+  extra: {
+    backgroundColor: colors.surface,
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0px 1px 4px rgba(0,0,0,0.12)',
+  },
   extraText: { fontFamily: fonts.bold, color: colors.text },
 });

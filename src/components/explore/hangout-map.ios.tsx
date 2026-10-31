@@ -6,7 +6,12 @@ import { colors } from '@/theme';
 
 import { focusZoom, initialCamera, type HangoutMapProps } from './hangout-map.shared';
 
-const symbols = { music: 'music.note', food: 'fork.knife', creative: 'paintpalette.fill', wellness: 'figure.yoga' } as const;
+const symbols = {
+  music: 'music.note',
+  food: 'fork.knife',
+  creative: 'paintpalette.fill',
+  wellness: 'figure.yoga',
+} as const;
 
 export function HangoutMap({ hangouts, selectedId, onSelect }: HangoutMapProps) {
   const ref = useRef<AppleMaps.MapView>(null);

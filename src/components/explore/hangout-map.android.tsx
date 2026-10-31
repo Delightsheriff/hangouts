@@ -25,7 +25,12 @@ export function HangoutMap({ hangouts, selectedId, onSelect }: HangoutMapProps) 
       style={StyleSheet.absoluteFill}
       cameraPosition={initialCamera}
       colorScheme={GoogleMaps.MapColorScheme.LIGHT}
-      uiSettings={{ compassEnabled: false, zoomControlsEnabled: false, mapToolbarEnabled: false, myLocationButtonEnabled: false }}
+      uiSettings={{
+        compassEnabled: false,
+        zoomControlsEnabled: false,
+        mapToolbarEnabled: false,
+        myLocationButtonEnabled: false,
+      }}
       markers={hangouts.map((h) => ({ id: h.id, title: h.title, snippet: h.dateShort, coordinates: h.coordinates }))}
       onMarkerClick={(m) => m.id && onSelect(m.id)}
     />

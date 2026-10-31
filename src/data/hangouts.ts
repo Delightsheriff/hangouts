@@ -38,8 +38,7 @@ export type Hangout = {
   coordinates: { latitude: number; longitude: number };
 };
 
-const unsplash = (id: string, w: number) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+const unsplash = (id: string, w: number) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
 const face = (path: string) => `https://randomuser.me/api/portraits/${path}.jpg`;
 
 export const user = {
