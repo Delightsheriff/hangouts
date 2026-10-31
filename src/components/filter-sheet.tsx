@@ -33,8 +33,16 @@ export function FilterSheet({ open, onOpenChange }: FilterSheetProps) {
           onChange={(maxDistanceKm) => hangoutActions.setFilters({ maxDistanceKm })}
         />
 
-        <Row label="Free hangouts only" value={filters.freeOnly} onChange={(freeOnly) => hangoutActions.setFilters({ freeOnly })} />
-        <Row label="Hide full hangouts" value={filters.hideFull} onChange={(hideFull) => hangoutActions.setFilters({ hideFull })} />
+        <Row
+          label="Free hangouts only"
+          value={filters.freeOnly}
+          onChange={(freeOnly) => hangoutActions.setFilters({ freeOnly })}
+        />
+        <Row
+          label="Hide full hangouts"
+          value={filters.hideFull}
+          onChange={(hideFull) => hangoutActions.setFilters({ hideFull })}
+        />
 
         <Pressable onPress={hangoutActions.resetFilters} style={styles.reset}>
           <Text style={styles.resetText}>Reset filters</Text>
@@ -77,15 +85,28 @@ function Row({ label, value, onChange }: { label: string; value: boolean; onChan
   return (
     <View style={styles.row}>
       <Text style={styles.rowLabel}>{label}</Text>
-      <Switch value={value} onValueChange={onChange} trackColor={{ true: colors.ink }} />
+      <Switch value={value} onValueChange={onChange} trackColor={{ true: colors.accentPurple }} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   scrim: { flex: 1, backgroundColor: 'rgba(0,0,0,0.3)' },
-  sheet: { backgroundColor: colors.surface, borderTopLeftRadius: 28, borderTopRightRadius: 28, paddingHorizontal: 20, paddingTop: 10 },
-  grabber: { alignSelf: 'center', width: 40, height: 5, borderRadius: 3, backgroundColor: colors.border, marginBottom: 8 },
+  sheet: {
+    backgroundColor: colors.surface,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    paddingHorizontal: 20,
+    paddingTop: 10,
+  },
+  grabber: {
+    alignSelf: 'center',
+    width: 40,
+    height: 5,
+    borderRadius: 3,
+    backgroundColor: colors.border,
+    marginBottom: 8,
+  },
   heading: { fontFamily: fonts.bold, fontSize: 15, color: colors.text, marginTop: 18, marginBottom: 10 },
   segmented: { flexDirection: 'row', backgroundColor: colors.surfaceMuted, borderRadius: 14, padding: 3 },
   segment: { flex: 1, paddingVertical: 9, borderRadius: 11, alignItems: 'center' },
