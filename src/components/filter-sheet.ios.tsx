@@ -1,10 +1,11 @@
 import { BottomSheet, Button, Form, Group, Host, Picker, Section, Slider, Text, Toggle } from '@expo/ui/swift-ui';
-import { pickerStyle, presentationDetents, presentationDragIndicator, tag } from '@expo/ui/swift-ui/modifiers';
+import { pickerStyle, presentationDetents, presentationDragIndicator, tag, tint } from '@expo/ui/swift-ui/modifiers';
 import * as Haptics from 'expo-haptics';
 import { StyleSheet } from 'react-native';
 
 import type { When } from '@/data/hangouts';
 import { hangoutActions, useHangoutStore } from '@/store/hangouts-store';
+import { colors } from '@/theme';
 
 import { whenOptions, type FilterSheetProps } from './filter-sheet.shared';
 
@@ -15,7 +16,12 @@ export function FilterSheet({ open, onOpenChange }: FilterSheetProps) {
   return (
     <Host style={styles.host}>
       <BottomSheet isPresented={open} onIsPresentedChange={onOpenChange}>
-        <Group modifiers={[presentationDetents(['medium', 'large']), presentationDragIndicator('visible')]}>
+        <Group
+          modifiers={[
+            presentationDetents(['medium', 'large']),
+            presentationDragIndicator('visible'),
+            tint(colors.accentPurple),
+          ]}>
           <Form>
             <Section title="When">
               <Picker<When>
