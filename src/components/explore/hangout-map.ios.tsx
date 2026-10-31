@@ -33,7 +33,7 @@ export function HangoutMap({ hangouts, selectedId, onSelect }: HangoutMapProps) 
       style={StyleSheet.absoluteFill}
       cameraPosition={initialCamera}
       colorScheme={AppleMaps.MapColorScheme.LIGHT}
-      properties={{ selectionEnabled: false }}
+      properties={{ selectionEnabled: false, pointsOfInterest: { including: [] } }}
       uiSettings={{ compassEnabled: false, scaleBarEnabled: false, myLocationButtonEnabled: false }}
       markers={hangouts.map((h) => ({
         id: h.id,

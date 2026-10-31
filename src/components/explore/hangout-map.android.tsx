@@ -5,6 +5,9 @@ import { StyleSheet } from 'react-native';
 import { focusZoom, initialCamera, type HangoutMapProps } from './hangout-map.shared';
 
 /** Requires `android.config.googleMaps.apiKey` in app.json and a development build. */
+// Keep the map as clean as the design: no business or landmark pins.
+const hidePointsOfInterest = JSON.stringify([{ featureType: 'poi', stylers: [{ visibility: 'off' }] }]);
+
 export function HangoutMap({ hangouts, selectedId, onSelect }: HangoutMapProps) {
   const ref = useRef<GoogleMaps.MapView>(null);
   const selected = hangouts.find((h) => h.id === selectedId);
@@ -25,6 +28,7 @@ export function HangoutMap({ hangouts, selectedId, onSelect }: HangoutMapProps) 
       style={StyleSheet.absoluteFill}
       cameraPosition={initialCamera}
       colorScheme={GoogleMaps.MapColorScheme.LIGHT}
+      properties={{ mapStyleOptions: { json: hidePointsOfInterest } }}
       uiSettings={{
         compassEnabled: false,
         zoomControlsEnabled: false,

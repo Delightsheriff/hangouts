@@ -6,11 +6,11 @@ export type HangoutMapProps = {
   onSelect: (id: string) => void;
 };
 
-/** Bay Area overview, matching the design's framing. */
+/** Whole-bay overview, from San Rafael to San Bruno, matching the design's framing. */
 export const initialCamera = {
-  coordinates: { latitude: 37.79, longitude: -122.37 },
-  zoom: 10.6,
+  coordinates: { latitude: 37.77, longitude: -122.37 },
+  zoom: 9.9,
 };
 
-/** Zoom used when focusing a single hangout. */
-export const focusZoom = 12.5;
+/** Selecting a hangout pans to it without leaving the overview. */
+export const focusZoom = initialCamera.zoom;
